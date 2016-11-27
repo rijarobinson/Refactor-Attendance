@@ -52,6 +52,26 @@ var octopus = {
 var view = {
     init:function(weeks) {
         var students = octopus.getStudents();
+
+        var thead = document.createElement("thead");
+        thead.id = "table-head";
+        document.getElementById("attendance").appendChild(thead);
+
+        var td = document.createElement("td");
+        document.getElementById("table-head").appendChild(td);
+        $(td).text("Student Name");
+
+        for (var c = 0; c < weeks; c++) {
+            var td = document.createElement("td");
+            td.id = "week-head" + c;
+            document.getElementById("table-head").appendChild(td);
+            $(td).text("Week " + (c+1));
+            }
+
+        var td = document.createElement("td");
+        document.getElementById("table-head").appendChild(td);
+        $(td).text("Days Missed");
+
         for (var i = 0; i < students.length; i++) {
             var name = students[i].name;
             var tr = document.createElement("tr");
@@ -62,6 +82,7 @@ var view = {
             td.id = "student-name" + i;
             document.getElementById("student" + i).appendChild(td);
             $(td).text(name);
+
             for (var c = 0; c < weeks; c++) {
                 var td = document.createElement("td");
                 td.id = "week" + String(i) + String(c);
@@ -73,6 +94,11 @@ var view = {
                 document.getElementById("week" + String(i) + String(c)).appendChild(input);
 
         }
+            var daysMissed = students[i].daysMissed;
+            var td = document.createElement("td");
+            td.id = "days-missed" + i;
+            document.getElementById("student" + i).appendChild(td);
+            $(td).text(daysMissed);
         }
     }
 };
